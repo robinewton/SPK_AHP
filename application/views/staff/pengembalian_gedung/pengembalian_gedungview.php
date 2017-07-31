@@ -35,16 +35,20 @@ $(document).ready(function () {
 		{
 			foreach($data as $row)
 			{
-				$id=$row->id_penyewa;
+				$id=$row->id_pengembalian;
 				$nomor+=1;
+				$tgl = $row->tanggal_pengembalian;
 			?>
 			<tr>
 				<td><?php echo $nomor;?></td>
-				<td><?=$row->KTP;?></td>
-				<td><?=$row->KTP;?></td>
-				<td><?=$row->KTP;?></td>
-				<td><?=$row->KTP;?></td>
-				<td><?=$row->KTP;?></td>
+				<td><?=$row->nama_pengembali_gedung;?></td>
+				<td><?=$row->id_gedung;?></td>
+				<td><?=$row->ktp_pengembalian_gedung;?></td>
+				<td><?=$row->alamat_pengembali_gedung;?></td>
+				<td><?=$row->pekerjaan_pengembali_gedung;?></td>
+				<td><?=$row->tlp_pengembali_gedung;?></td>
+				<td><?= date("m/d/Y", strtotime($tgl)) ?></td>
+				<td><?=$row->jam_pengembalian;?></td>
 			</tr>
 			<?php
 			}

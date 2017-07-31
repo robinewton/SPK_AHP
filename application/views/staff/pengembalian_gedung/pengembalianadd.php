@@ -8,11 +8,13 @@ date_default_timezone_set("asia/jakarta");
 echo validation_errors();
 //echo form_open(base_url(akses().'/Pegawai/add'),array('class'=>'form-horizontal'));
 echo form_open(base_url(akses() . '/pengembalian/addall'), array('class' => 'form-horizontal'));
+echo "<input type='hidden' name='id_gedung' id='id_gedung'>";
+echo "<input type='hidden' name='idUser' value='user_info('user_id')' >";
 ?>
 <div class="form-group ">
     <label class="col-sm-2 control-label" for=""> Nama Pengembali</label>
     <div class="col-md-5">
-        <input type="text" class="form-control" id="datapeengembalian" name="datapeengembalian"/>
+        <input type="text" class="form-control" id="datapeengembalian" name="datapeengembalian" required/>
     </div>
     <div class="col-md-2">
         <input type="button" class="btn btn-info btn-flat" id="pengembaliBtn" value="add"
@@ -24,13 +26,13 @@ echo form_open(base_url(akses() . '/pengembalian/addall'), array('class' => 'for
 <div class="form-group ">
     <label class="col-sm-2 control-label" for=""> KTP</label>
     <div class="col-md-5">
-        <input type="text" class="form-control" id="ktpPengembali" name="ktpPengembali"/>
+        <input type="text" class="form-control" id="ktpPengembali" name="ktpPengembali" required/>
     </div>
 </div>
 <div class="form-group ">
     <label class="col-sm-2 control-label" for=""> Nama Gedung</label>
     <div class="col-md-5">
-        <input type="text" class="form-control" id="namaGedung" name="namaGedung" disabled/>
+        <input type="text" class="form-control" id="namaGedung" name="namaGedung" required/>
     </div>
     <div class="col-md-2">
         <input type="button" class="btn btn-info btn-flat" id="pelangganmotorbtn" value="add"
@@ -41,14 +43,21 @@ echo form_open(base_url(akses() . '/pengembalian/addall'), array('class' => 'for
 <div class="form-group ">
     <label class="col-sm-2 control-label" for="">Alamat</label>
     <div class="col-md-5">
-        <textarea class="form-control" id="alamatText"></textarea>
+        <textarea class="form-control" id="alamatText" name="alamatText" required></textarea>
     </div>
 </div>
 
 <div class="form-group ">
+    <label class="col-sm-2 control-label" for="">Pekerjaan</label>
+    <div class="col-md-5">
+        <input type="text" name="Pekerjaan" id="Pekerjaan" class="form-control" required
+               value=""/>
+    </div>
+</div>
+<div class="form-group ">
     <label class="col-sm-2 control-label" for="">No Tlp</label>
     <div class="col-md-5">
-        <input type="text" name="noTlp" id="noTlp" class="form-control "
+        <input type="text" name="noTlp" id="noTlp" class="form-control" required
                value=""/>
     </div>
 </div>
@@ -71,8 +80,7 @@ echo form_open(base_url(akses() . '/pengembalian/addall'), array('class' => 'for
 <div class="form-group ">
     <label class="col-sm-2 control-label">&nbsp;</label>
     <div class="col-md-6">
-        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-check"></i> Simpan</button>
-        <!--        <button type="reset" class="btn btn-danger btn-flat"><i class="glyphicon glyphicon-refresh"></i> Batal</button>-->
+        <input type="submit" name="submit" value="simpan" class="btn btn-success">
         <a href="<?php echo base_url('staff/pengembalian'); ?>" class="btn btn-danger"><i
                     class="glyphicon glyphicon-refresh"></i> Cancel</a>
     </div>
@@ -178,15 +186,15 @@ echo form_close();
             document.getElementById("datapeengembalian").value = $(this).attr('data-penyewa'),
                 document.getElementById("ktpPengembali").value = $(this).attr('data-ktp'),
                 document.getElementById("alamatText").value = $(this).attr('data-alamat'),
-//            document.getElementById("datapeengembalian").value = $(this).attr('data-pekerjaan'),
+            document.getElementById("Pekerjaan").value = $(this).attr('data-pekerjaan'),
                 document.getElementById("noTlp").value = $(this).attr('data-tlp');
 //                document.getElementById("PELANGGAN_ID").value = $(this).attr('data-idPeny');
-                $('#modalTambaPenyewa').modal('hide');
+            $('#modalTambaPenyewa').modal('hide');
         });
         $(document).on('click', '.pilih2', function (e) {
-//            document.getElementById("namaGedung1").value = $(this).attr('data-idGedung'),
-                document.getElementById("namaGedung").value = $(this).attr('data-namaGedung');
-                $('#modalGedung').modal('hide');
+            document.getElementById("id_gedung").value = $(this).attr('data-idGedung'),
+            document.getElementById("namaGedung").value = $(this).attr('data-namaGedung');
+            $('#modalGedung').modal('hide');
         });
         $('#datatable').DataTable({
             "paging": true,
